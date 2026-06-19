@@ -63,7 +63,7 @@ public class InfluxGateway {
                 from(bucket: "%s")
                   |> range(start: %s, stop: %s)
                   |> filter(fn: (r) => r.sensor == "%s" and r.variable == "%s" and r._field == "valor")
-                  |> aggregateWindow(every: 1d, fn: mean, createEmpty: false)
+                  |> aggregateWindow(every: 1d, fn: mean, createEmpty: false, timeSrc: "_start")
                 """.formatted(bucket, desde, hasta, sensor, variable);
         List<MediaDiaria> salida = new ArrayList<>();
         for (FluxTable table : cliente.getQueryApi().query(flux)) {
@@ -88,7 +88,7 @@ public class InfluxGateway {
                 from(bucket: "%s")
                   |> range(start: %s, stop: %s)
                   |> filter(fn: (r) => r.sensor == "%s" and r.variable == "%s" and r._field == "valor")
-                  |> aggregateWindow(every: 1d, fn: sum, createEmpty: false)
+                  |> aggregateWindow(every: 1d, fn: sum, createEmpty: false, timeSrc: "_start")
                   |> filter(fn: (r) => r._value > 0.0)
                 """.formatted(bucket, desde, hasta, sensor, variable);
         List<MediaDiaria> salida = new ArrayList<>();
