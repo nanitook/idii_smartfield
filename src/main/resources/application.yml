@@ -1,0 +1,30 @@
+server:
+  port: 8090
+
+smartfield:
+  # Fecha de referencia ("ahora") para reproducir el dataset historico de mayo 2026.
+  fecha-referencia: "2026-05-31T23:59:59Z"
+
+  mongo:
+    uri: "mongodb://localhost:27017"
+    base-datos: "smartfield"
+
+  neo4j:
+    uri: "bolt://localhost:7687"
+    usuario: "neo4j"
+    clave: "smartfield123"
+
+  influx:
+    url: "http://localhost:8086"
+    token: "smartfield-token-dev"
+    org: "smartfield"
+    bucket: "mediciones"
+
+  # Si es true, al arrancar ejecuta los 4 patrones e imprime los resultados por consola.
+  demo: true
+
+logging:
+  level:
+    com.smartfield.orquestacion: INFO
+    org.neo4j.driver: WARN
+    org.mongodb.driver: WARN
